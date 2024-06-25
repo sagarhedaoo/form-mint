@@ -1,11 +1,13 @@
 import React from "react";
 import { GoogleGeminiEffectDemo } from "./GeminiHero";
+import { WobbleCard } from "../_acternityComponents/ui/wobble-card";
+import { WobbleCardDemo } from "./WobbleCard";
 
 const Hero = () => {
   return (
     <div>
       <GoogleGeminiEffectDemo />
-      More to add
+      <WobbleCardDemo />
     </div>
   );
 };
