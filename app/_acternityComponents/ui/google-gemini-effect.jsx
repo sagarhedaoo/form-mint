@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import React from "react";
@@ -25,7 +24,7 @@ export const GoogleGeminiEffect = ({
           `Experience the Future of Forms: Smart, Simple, and Swift!`}
       </p>
       <div className="w-full h-[700px] -top-60 md:-top-40  flex items-center justify-center bg-red-transparent absolute ">
-        <button className="font-bold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-24 mt-8 z-30 md:text-base text-black text-xs  w-fit mx-auto ">
+        <button className="font-bold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-24 mt-8 z-30 md:text-base text-black text-xs  w-fit mx-auto">
           Get Started
         </button>
       </div>
