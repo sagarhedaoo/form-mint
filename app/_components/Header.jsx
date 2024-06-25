@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 const Header = () => {
   const { user, isSignedIn } = useUser();
@@ -28,7 +29,9 @@ const Header = () => {
         />
         {isSignedIn ? (
           <div className="flex items-center gap-5">
-            <Button variant="outline">Dashboard</Button>
+            <Link href={"/dashboard"}>
+              <Button variant="outline">Dashboard</Button>
+            </Link>
             <UserButton />
           </div>
         ) : (
