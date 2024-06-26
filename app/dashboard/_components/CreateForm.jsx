@@ -10,7 +10,15 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { PlaceholdersAndVanishInput } from "@/app/_acternityComponents/ui/placeholders-and-vanish-input";
+import { AIChatSession } from "@/configs/AIModal";
+import { useUser } from "@clerk/nextjs";
+import { db } from "@/configs";
+import { JsonForms } from "@/configs/schema";
+import moment from "moment/moment";
+import { useRouter } from "next/navigation";
 
+const PROMPT =
+  ", On the basis of description please give form in json format with form title, form subheading with form having form filed, form name, placeholder name, and form label, fieldType, field required in Json format";
 const CreateForm = () => {
   const placeholders = [
     "Create a user registration form that includes fields for name, email, password, and confirm password. Include validation rules for email and password strength",
@@ -21,9 +29,32 @@ const CreateForm = () => {
   ];
 
   const [userInput, setUserInput] = useState();
+  const [loading, setLoading] = useState();
+  const { user } = useUser();
+  const route = useRouter();
 
-  const onSubmit = (e) => {
-    console.log(userInput);
+  const onSubmit = async () => {
+    setLoading(true);
+    const result = await AIChatSession.sendMessage(
+      "Description:" + userInput + PROMPT
+    );
+    console.log(result.response.text());
+    if (result.response.text()) {
+      const response = await db
+        .insert(JsonForms)
+        .values({
+          jsonform: result.response.text(),
+          createdBy: user?.primaryEmailAddress?.emailAddress,
+          createdDate: moment().format("DD/MM/YYYY"),
+        })
+        .returning({ id: JsonForms.id });
+      console.log("New form ID", response[0].id);
+      if (response[0].id) {
+        route.push("/edit-form/" + response[0].id);
+      }
+      setLoading(false);
+    }
+    setLoading(false);
   };
 
   return (
