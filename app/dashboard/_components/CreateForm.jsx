@@ -17,8 +17,11 @@ import { JsonForms } from "@/configs/schema";
 import moment from "moment/moment";
 import { useRouter } from "next/navigation";
 
+// const PROMPT =
+//   ", On the basis of description please give form in json format with formTitle, formSubheading and form having formField, formName, placeholderName, and formLabel, fieldType, fieldRequired in Json format";
+
 const PROMPT =
-  ", On the basis of description please give form in json format with form title, form subheading with form having form filed, form name, placeholder name, and form label, fieldType, field required in Json format";
+  ", On the basis of description please give form in json format with formTitle, formSubheading and form having formField, formName, placeholderName, and formLabel, fieldType, fieldRequired in Json format. You are free to use select, checkboxes, radio just make sure you mention that in fieldType. In select, make sure you give value and label for all options.";
 const CreateForm = () => {
   const placeholders = [
     "Create a user registration form that includes fields for name, email, password, and confirm password. Include validation rules for email and password strength",
