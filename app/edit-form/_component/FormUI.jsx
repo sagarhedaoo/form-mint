@@ -13,10 +13,15 @@ import { Checkbox } from "@/components/ui/checkbox";
 import FieldEdit from "./FieldEdit";
 
 // formTitle, formSubheading and form having formField, formName, fieldName, placeholderName, and formLabel, fieldType, fieldRequired
-const FormUI = ({ jsonForm, onFieldUpdate, deleteField }) => {
+const FormUI = ({ jsonForm, onFieldUpdate, deleteField, selectedTheme }) => {
   console.log(jsonForm);
   return (
-    <div className="border p-5 md:w-[600px] rounded-lg">
+    <div
+      className="border p-5 md:w-[600px] rounded-lg"
+      data-theme={selectedTheme}
+    >
+      {/* Width changes later */}
+      {/* data-theme="cyberpunk" */}
       <h2 className="font-bold text-center text-2xl">{jsonForm.formTitle}</h2>
       <h2 className="text-sm text-gray-600 text-center">
         {jsonForm.formSubheading}
