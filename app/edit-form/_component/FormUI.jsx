@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import FieldEdit from "./FieldEdit";
 
 // formTitle, formSubheading and form having formField, formName, fieldName, placeholderName, and formLabel, fieldType, fieldRequired
-const FormUI = ({ jsonForm }) => {
+const FormUI = ({ jsonForm, onFieldUpdate, deleteField }) => {
   console.log(jsonForm);
   return (
     <div className="border p-5 md:w-[600px] rounded-lg">
@@ -53,11 +53,11 @@ const FormUI = ({ jsonForm }) => {
               </RadioGroup>
             </div>
           ) : field?.fieldType == "checkbox" ? (
-            <div className="my-3 w-full">
-              <label className="text-xs">{field?.label}</label>
+            <div className="my-3 w-full ">
+              <label className="text-xs">{field?.formLabel}</label>
               {field?.options ? (
                 field?.options?.map((item, index) => (
-                  <div className="flex gap-2" key={index}>
+                  <div className="flex gap-2  items-center" key={index}>
                     <Checkbox />
                     <h2>{item?.label}</h2>
                   </div>
@@ -83,7 +83,11 @@ const FormUI = ({ jsonForm }) => {
             </div>
           )}
           <div>
-            <FieldEdit defaultValue={field} />
+            <FieldEdit
+              defaultValue={field}
+              onUpdate={(value) => onFieldUpdate(value, index)}
+              deleteField={() => deleteField(index)}
+            />
           </div>
         </div>
       ))}
