@@ -8,25 +8,26 @@ import {
 } from "@/components/ui/select";
 import Themes from "@/app/_data/Themes";
 
-const Controller = () => {
+const Controller = ({ selectedTheme }) => {
   return (
     <div>
-      <h2>Select Themes</h2>
-      <Select>
+      <h2>Select Theme</h2>
+
+      <Select onValueChange={(value) => selectedTheme(value)}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Theme" />
         </SelectTrigger>
         <SelectContent>
           {Themes.map((theme, index) => (
-            <SelectItem value="theme.theme" key={index}>
+            <SelectItem value={theme.theme} key={index}>
               <div className="flex gap-3">
-                <div className="flex ">
+                <div className="flex">
                   <div
-                    className="h-5 w-5 rounder-l-md"
+                    className="h-5 w-5 rounded-l-md"
                     style={{ backgroundColor: theme.primary }}
                   ></div>
                   <div
-                    className="h-5 w-5"
+                    className="h-5 w-5 "
                     style={{ backgroundColor: theme.secondary }}
                   ></div>
                   <div

@@ -33,7 +33,7 @@ const FormUI = ({ jsonForm, onFieldUpdate, deleteField, selectedTheme }) => {
             <div className="my-3 w-full">
               <label className="text-xs">{field?.formLabel}</label>
               <Select>
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full bg-transparent">
                   <SelectValue placeholder={field?.placeholderName} />
                 </SelectTrigger>
                 <SelectContent>

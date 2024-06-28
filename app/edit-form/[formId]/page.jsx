@@ -96,7 +96,7 @@ const EditForm = ({ params }) => {
       </h2>
       <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-5 ">
         <div className="p-5 border rounded-lg shadow-sm">
-          <Controller />
+          <Controller selectedTheme={(value) => setSelectedTheme(value)} />
         </div>
 
         <div className="md:col-span-2 border rounded-lg p-5 h-full flex justify-center ">
