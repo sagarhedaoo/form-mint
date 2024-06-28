@@ -19,6 +19,7 @@ const EditForm = ({ params }) => {
   const [record, setRecord] = useState([]);
 
   const [selectedTheme, setSelectedTheme] = useState("light");
+  const [selectedBackground, setSelectedBackground] = useState();
 
   var datetime = new Date();
   useEffect(() => {
@@ -96,10 +97,18 @@ const EditForm = ({ params }) => {
       </h2>
       <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-5 ">
         <div className="p-5 border rounded-lg shadow-sm">
-          <Controller selectedTheme={(value) => setSelectedTheme(value)} />
+          <Controller
+            selectedTheme={(value) => setSelectedTheme(value)}
+            selectedBackground={(value) => setSelectedBackground(value)}
+          />
         </div>
 
-        <div className="md:col-span-2 border rounded-lg p-5 h-full flex justify-center ">
+        <div
+          className="md:col-span-2 border rounded-lg p-5 h-full flex justify-center "
+          style={{
+            backgroundImage: selectedBackground,
+          }}
+        >
           <FormUI
             jsonForm={jsonForm}
             selectedTheme={selectedTheme}
