@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import FieldEdit from "./FieldEdit";
+import ShinyButton from "@/app/_magicuiComponents/shiny-button";
 
 // formTitle, formSubheading and form having formField, formName, fieldName, placeholderName, and formLabel, fieldType, fieldRequired
 const FormUI = ({
@@ -19,6 +20,8 @@ const FormUI = ({
   deleteField,
   selectedTheme,
   selectedBorder,
+  editable = true,
+  preview = true,
 }) => {
   console.log(jsonForm);
   return (
@@ -29,6 +32,11 @@ const FormUI = ({
     >
       {/* Width changes later */}
       {/* data-theme="cyberpunk" */}
+      {!preview && (
+        <div className="font-bold text-center text-2xl mb-2">
+          <ShinyButton text={"PREVIEW ONLY, NOT FOR DISTRIBUTION"} />
+        </div>
+      )}
       <h2 className="font-bold text-center text-2xl">{jsonForm.formTitle}</h2>
       <h2 className="text-sm text-gray-600 text-center">
         {jsonForm.formSubheading}
@@ -94,13 +102,15 @@ const FormUI = ({
               />
             </div>
           )}
-          <div>
-            <FieldEdit
-              defaultValue={field}
-              onUpdate={(value) => onFieldUpdate(value, index)}
-              deleteField={() => deleteField(index)}
-            />
-          </div>
+          {editable && (
+            <div>
+              <FieldEdit
+                defaultValue={field}
+                onUpdate={(value) => onFieldUpdate(value, index)}
+                deleteField={() => deleteField(index)}
+              />
+            </div>
+          )}
         </div>
       ))}
       <button className="btn btn-primary">Submit</button>

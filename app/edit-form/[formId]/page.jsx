@@ -3,12 +3,15 @@ import { db } from "@/configs";
 import { JsonForms } from "@/configs/schema";
 import { useUser } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ShareIcon, SquareArrowUpRightIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import FormUI from "../_component/FormUI";
 import { toast } from "@/components/ui/use-toast";
 import Controller from "../_component/Controller";
+import { Button } from "@/components/ui/button";
+import ShinyButton from "@/app/_magicuiComponents/shiny-button";
+import Link from "next/link";
 
 const EditForm = ({ params }) => {
   const { user } = useUser();
@@ -128,12 +131,25 @@ const EditForm = ({ params }) => {
   };
   return (
     <div className="p-10">
-      <h2
-        className="flex gap-2 items-center my-5 cursor-pointer hover:font-bold"
-        onClick={() => router.back()}
-      >
-        <ArrowLeft /> Back
-      </h2>
+      <div className="flex justify-between items-center">
+        <h2
+          className="flex gap-2 items-center my-5 cursor-pointer hover:font-bold"
+          onClick={() => router.back()}
+        >
+          <ArrowLeft /> Back
+        </h2>
+        <div className="flex gap-2">
+          <Link href={"/form-preview/" + record?.id} target="_blank">
+            {" "}
+            <ShinyButton text={"Live Preview"} />{" "}
+          </Link>
+
+          <Button className="flex gap-2 hover:bg-green-500">
+            {" "}
+            <ShareIcon className="h-5 w-5" /> Share
+          </Button>
+        </div>
+      </div>
       <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-5 ">
         <div className="p-5 border rounded-lg shadow-sm">
           <Controller
