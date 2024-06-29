@@ -39,7 +39,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "daisyui": "^4.12.8",
+    "daisyui": "^4.12.10",
     "drizzle-kit": "^0.22.7",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
