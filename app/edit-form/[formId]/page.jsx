@@ -20,6 +20,7 @@ const EditForm = ({ params }) => {
 
   const [selectedTheme, setSelectedTheme] = useState("light");
   const [selectedBackground, setSelectedBackground] = useState();
+  const [selectedBorder, setSelectedBorder] = useState();
 
   var datetime = new Date();
   useEffect(() => {
@@ -39,6 +40,8 @@ const EditForm = ({ params }) => {
 
     console.log(JSON.parse(result[0].jsonform));
     setJsonForm(JSON.parse(result[0].jsonform));
+    setSelectedBackground(result[0].background);
+    setSelectedTheme(result[0].theme);
     setRecord(result[0]);
   };
 
@@ -62,12 +65,48 @@ const EditForm = ({ params }) => {
       )
       .returning({ id: JsonForms.id });
 
-    toast({
-      title: "Updated Form !!",
-      description: datetime.toISOString().slice(0, 10),
-    });
+    if (result) {
+      toast({
+        title: "Updated Form !!",
+        description: datetime.toISOString().slice(0, 10),
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
+    }
 
     console.log(result);
+  };
+
+  const updateControllerFields = async (value, columnName) => {
+    const result = await db
+      .update(JsonForms)
+      .set({
+        [columnName]: value,
+      })
+      .where(
+        and(
+          eq(JsonForms.id, record.id),
+          eq(JsonForms.createdBy, user?.primaryEmailAddress.emailAddress)
+        )
+      )
+      .returning({ id: JsonForms.id });
+
+    if (result) {
+      toast({
+        title: "Updated Form !!",
+        description: datetime.toISOString().slice(0, 10),
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
+    }
   };
 
   const deleteField = (indexToRemove) => {
@@ -98,8 +137,18 @@ const EditForm = ({ params }) => {
       <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-5 ">
         <div className="p-5 border rounded-lg shadow-sm">
           <Controller
-            selectedTheme={(value) => setSelectedTheme(value)}
-            selectedBackground={(value) => setSelectedBackground(value)}
+            selectedTheme={(value) => {
+              setSelectedTheme(value);
+              updateControllerFields(value, "theme");
+            }}
+            selectedBackground={(value) => {
+              setSelectedBackground(value);
+              updateControllerFields(value, "background");
+            }}
+            selectedBorder={(value) => {
+              setSelectedBorder(value);
+              updateControllerFields(value, "style");
+            }}
           />
         </div>
 
@@ -112,6 +161,7 @@ const EditForm = ({ params }) => {
           <FormUI
             jsonForm={jsonForm}
             selectedTheme={selectedTheme}
+            selectedBorder={selectedBorder}
             onFieldUpdate={onFieldUpdate}
             deleteField={(index) => deleteField(index)}
           />

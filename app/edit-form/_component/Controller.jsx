@@ -9,8 +9,9 @@ import {
 import Themes from "@/app/_data/Themes";
 import GradientBg from "@/app/_data/GradientBg";
 import { Button } from "@/components/ui/button";
+import Style from "@/app/_data/Style";
 
-const Controller = ({ selectedTheme, selectedBackground }) => {
+const Controller = ({ selectedTheme, selectedBackground, selectedBorder }) => {
   const [showMore, setShowMore] = useState(6);
   return (
     <div>
@@ -58,7 +59,9 @@ const Controller = ({ selectedTheme, selectedBackground }) => {
             index < showMore && (
               <div
                 key={index}
-                onClick={() => selectedBackground(bg.gradient)}
+                onClick={() => {
+                  selectedBackground(bg.gradient);
+                }}
                 className="w-full h-[60px] rounded-lg hover:border-black hover:border-2 flex items-center justify-center cursor-pointer"
                 style={{ background: bg.gradient }}
               >
@@ -67,6 +70,7 @@ const Controller = ({ selectedTheme, selectedBackground }) => {
             )
         )}
       </div>
+
       <Button
         onClick={() => setShowMore(showMore > 6 ? 6 : 20)}
         variant="ghost"
@@ -75,6 +79,20 @@ const Controller = ({ selectedTheme, selectedBackground }) => {
       >
         {showMore > 6 ? "Show Less" : "Show More"}
       </Button>
+
+      <h2 className="mt-8 my-1">Style</h2>
+      <div className="grid grid-cols-3 gap-5">
+        {Style.map((item, index) => (
+          <div
+            key={index}
+            className="w-full h-[60px] rounded-lg hover:border-black hover:border-dashed hover:border-2 flex items-center justify-center cursor-pointer"
+            onClick={() => selectedBorder(item.value)}
+            // style={{ border: item.value }}
+          >
+            {item.name}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
