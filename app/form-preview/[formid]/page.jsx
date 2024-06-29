@@ -42,6 +42,7 @@ const LivePreview = ({ params }) => {
           selectedTheme={record?.theme}
           editable={false}
           preview={false}
+          formId={record.id}
         />
       )}
 

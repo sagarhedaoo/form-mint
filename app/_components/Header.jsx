@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const { user, isSignedIn } = useUser();

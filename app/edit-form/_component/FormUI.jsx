@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -26,9 +26,12 @@ const FormUI = ({
   selectedBorder,
   editable = true,
   preview = true,
+  formId = 0,
 }) => {
   var datetime = new Date();
   const [formData, setFormData] = useState({});
+  const [displayConfetti, displayedConfetti] = useState(false);
+  let formRef = useRef();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -77,6 +80,7 @@ const FormUI = ({
     const result = await db.insert(userResponses).values({
       jsonResponse: formData,
       createdDate: moment().format("DD-MM-YYYY"),
+      formRef: formId,
     });
 
     if (result) {
@@ -84,6 +88,7 @@ const FormUI = ({
         title: "Response saved successfully !",
         description: datetime.toISOString().slice(0, 10),
       });
+      formRef.reset();
     } else {
       toast({
         variant: "destructive",
@@ -95,6 +100,7 @@ const FormUI = ({
 
   return (
     <form
+      ref={(e) => (formRef = e)}
       onSubmit={onFormSubmit}
       className="border p-5 md:w-[600px] rounded-lg"
       style={{ border: selectedBorder }}
