@@ -30,7 +30,7 @@ const LivePreview = ({ params }) => {
   };
   return (
     <div
-      className="p-10 flex justify-center items-center w-screen"
+      className="p-10 flex justify-center items-start w-screen h-screen"
       style={{ backgroundImage: record?.background }}
     >
       {record && (

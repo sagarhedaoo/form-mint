@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -12,6 +12,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import FieldEdit from "./FieldEdit";
 import ShinyButton from "@/app/_magicuiComponents/shiny-button";
+import { userResponses } from "@/configs/schema";
+import moment from "moment";
+import { db } from "@/configs";
+import { toast } from "@/components/ui/use-toast";
 
 // formTitle, formSubheading and form having formField, formName, fieldName, placeholderName, and formLabel, fieldType, fieldRequired
 const FormUI = ({
@@ -23,9 +27,75 @@ const FormUI = ({
   editable = true,
   preview = true,
 }) => {
-  console.log(jsonForm);
+  var datetime = new Date();
+  const [formData, setFormData] = useState({});
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log("Input changed:", name, value); // Debugging line
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSelectChange = (name, value) => {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleCheckboxChange = (fieldLabel, itemName, value) => {
+    console.log(fieldLabel, itemName, value);
+    const list = formData?.[fieldLabel] ? formData?.[fieldLabel] : [];
+    console.log(list);
+
+    if (value) {
+      list.push({
+        label: itemName,
+        value: value,
+      });
+      setFormData({
+        ...formData,
+        [fieldLabel]: list,
+      });
+    } else {
+      const result = list.filter((item) => item.label == itemName);
+      setFormData({
+        ...formData,
+        [fieldLabel]: result,
+      });
+    }
+    // console.log(result);
+  };
+
+  const onFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log("Form data on submit:", formData); // Debugging line
+
+    const result = await db.insert(userResponses).values({
+      jsonResponse: formData,
+      createdDate: moment().format("DD-MM-YYYY"),
+    });
+
+    if (result) {
+      toast({
+        title: "Response saved successfully !",
+        description: datetime.toISOString().slice(0, 10),
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+      });
+    }
+  };
+
   return (
-    <div
+    <form
+      onSubmit={onFormSubmit}
       className="border p-5 md:w-[600px] rounded-lg"
       style={{ border: selectedBorder }}
       data-theme={selectedTheme}
@@ -47,13 +117,19 @@ const FormUI = ({
           {field?.fieldType == "select" ? (
             <div className="my-3 w-full">
               <label className="text-xs">{field?.formLabel}</label>
-              <Select>
+              <Select required={field?.fieldRequired}>
                 <SelectTrigger className="w-full bg-transparent">
                   <SelectValue placeholder={field?.placeholderName} />
                 </SelectTrigger>
                 <SelectContent>
                   {field?.options.map((item, index) => (
-                    <SelectItem key={index} value={item?.value}>
+                    <SelectItem
+                      key={index}
+                      value={item?.value}
+                      onValueChange={(v) =>
+                        handleSelectChange(field.formLabel, item.value)
+                      }
+                    >
                       {item?.label}
                     </SelectItem>
                   ))}
@@ -63,10 +139,16 @@ const FormUI = ({
           ) : field?.fieldType == "radio" ? (
             <div className="my-3 w-full">
               <label className="text-xs">{field?.formLabel}</label>
-              <RadioGroup>
+              <RadioGroup required={field?.fieldRequired}>
                 {field?.options.map((item, index) => (
                   <div key={index} className="flex items-center space-x-2">
-                    <RadioGroupItem value={item.label} id={item.label} />
+                    <RadioGroupItem
+                      value={item.label}
+                      id={item.label}
+                      onClick={() =>
+                        handleSelectChange(field.formLabel, item.label)
+                      }
+                    />
                     <Label htmlFor={item.label}>{item.label}</Label>
                   </div>
                 ))}
@@ -78,7 +160,11 @@ const FormUI = ({
               {field?.options ? (
                 field?.options?.map((item, index) => (
                   <div className="flex gap-2  items-center" key={index}>
-                    <Checkbox />
+                    <Checkbox
+                      onCheckedChange={(v) =>
+                        handleCheckboxChange(field.formLabel, item.label, v)
+                      }
+                    />
                     <h2>{item?.label}</h2>
                   </div>
                 ))
@@ -86,7 +172,7 @@ const FormUI = ({
                 <div className="my-3 w-full">
                   <h1 className="text-sm">{field?.placeholderName}</h1>
                   <div className="flex gap-2 items-center">
-                    <Checkbox />
+                    <Checkbox required={field?.fieldRequired} />
                     <h2>{field?.formLabel}</h2>
                   </div>
                 </div>
@@ -96,9 +182,12 @@ const FormUI = ({
             <div className="my-3 w-full">
               <label className="text-xs">{field?.formLabel}</label>
               <Input
+                // className="input-class"
                 type={field?.fieldType}
                 placeholder={field?.placeholderName}
-                name={field?.fieldName}
+                name={field?.formName}
+                required={field?.fieldRequired}
+                onChange={(e) => handleInputChange(e)}
               />
             </div>
           )}
@@ -113,8 +202,10 @@ const FormUI = ({
           )}
         </div>
       ))}
-      <button className="btn btn-primary">Submit</button>
-    </div>
+      <button type="submit" className="btn btn-primary">
+        Submit
+      </button>
+    </form>
   );
 };
 
