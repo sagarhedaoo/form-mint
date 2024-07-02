@@ -42,6 +42,7 @@ const Header = () => {
             onClick={() => imageClick()}
             className="cursor-pointer"
           />
+          AI Form Builder
           <div>
             <Navbar className="top-2" />
           </div>
@@ -87,13 +88,13 @@ function Navbar({ className }) {
           <div className="text-sm grid grid-cols-2 gap-10 p-4">
             <ProductItem
               title="My Forms"
-              href="https://localhost:3000/"
+              href={process.env.NEXT_PUBLIC_BASE_URL + "dashboard"}
               src="/dashboard.png"
               description="Create amazing forms"
             />
             <ProductItem
               title="Responses"
-              href="https://localhost:3000/"
+              href={process.env.NEXT_PUBLIC_BASE_URL + "dashboard/responses"}
               src="/dashboard.png"
               description="View your form responses"
             />
