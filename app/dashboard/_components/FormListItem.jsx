@@ -105,8 +105,8 @@ export const FormListItem = ({ formRecord, jsonForm }) => {
             data={{
               text: jsonForm?.formSubheading + ", Built with AI Form Builder",
               url:
-                process.env.NEXT_PUBLIC_BASE_URL +
-                "form-preview/" +
+                process.env.NEXT_PUBLIC_VERCEL_URL +
+                "form-final/" +
                 formRecord?.id,
               title: jsonForm?.formTitle,
             }}
