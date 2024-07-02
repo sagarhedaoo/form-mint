@@ -43,6 +43,7 @@ const LivePreview = ({ params }) => {
           editable={false}
           preview={false}
           formId={record.id}
+          enableSignIn={record?.enableSignIn}
         />
       )}
 

@@ -35,26 +35,33 @@ const Header = () => {
     !path.includes("form-final") && (
       <div className="p-5 border-b shadow-sm sticky top-0 z-50 bg-white ">
         <div className="flex items-center justify-between">
-          <Image
-            src={"/logo.svg"}
-            alt="Logo"
-            width={50}
-            height={25}
-            onClick={() => imageClick()}
-            className="cursor-pointer"
-          />
-          AI Form Builder
-          <div>
-            <Navbar className="top-2" />
+          <div className="flex justify-center items-center">
+            <Image
+              src={"/logo.svg"}
+              alt="Logo"
+              width={50}
+              height={25}
+              onClick={() => imageClick()}
+              className="cursor-pointer"
+            />
+            AI Form Builder
           </div>
+
+          {/* <div>
+            <Navbar className="top-2" />
+          </div> */}
           {isSignedIn ? (
-            <div className="flex items-center gap-5">
-              <Link href={"/dashboard"}>
-                <Button className="cursor-pointer" variant="outline">
-                  Dashboard
-                </Button>
-              </Link>
-              <UserButton />
+            <div>
+              <Navbar className="top-2" />
+
+              <div className="flex items-center gap-5">
+                <Link href={"/dashboard"}>
+                  <Button className="cursor-pointer" variant="outline">
+                    Dashboard
+                  </Button>
+                </Link>
+                <UserButton />
+              </div>
             </div>
           ) : (
             <Button
@@ -77,16 +84,8 @@ function Navbar({ className }) {
       className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}
     >
       <Menu setActive={setActive}>
-        {/* <MenuItem setActive={setActive} active={active} item="Services">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/web-dev">Forms</HoveredLink>
-            <HoveredLink href="/interface-design">Interface Design</HoveredLink>
-            <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
-            <HoveredLink href="/branding">Branding</HoveredLink>
-          </div>
-        </MenuItem> */}
         <MenuItem setActive={setActive} active={active} item="Forms">
-          <div className="text-sm grid grid-cols-2 gap-10 p-4">
+          <div className="text-sm gap-10 p-4 flex justify-center items-center">
             <ProductItem
               title="My Forms"
               href={process.env.NEXT_PUBLIC_BASE_URL + "dashboard"}
@@ -96,7 +95,7 @@ function Navbar({ className }) {
             <ProductItem
               title="Responses"
               href={process.env.NEXT_PUBLIC_BASE_URL + "dashboard/responses"}
-              src="/dashboard.png"
+              src="/responses.png"
               description="View your form responses"
             />
           </div>
@@ -104,14 +103,14 @@ function Navbar({ className }) {
         <MenuItem setActive={setActive} active={active} item="Analytics">
           <div className="flex flex-col space-y-4 text-sm">
             <HoveredLink href="/hobby">To-Do</HoveredLink>
-            {/* <HoveredLink href="/individual">Individual</HoveredLink>
-            <HoveredLink href="/team">Team</HoveredLink>
-            <HoveredLink href="/enterprise">Enterprise</HoveredLink> */}
           </div>
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Upgrade">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/hobby">To-Do</HoveredLink>
+          <div className="text-sm p-2">
+            <ProductItem
+              href={process.env.NEXT_PUBLIC_BASE_URL + "dashboard/upgrade"}
+              src="/upgrade.png"
+            />
           </div>
         </MenuItem>
       </Menu>

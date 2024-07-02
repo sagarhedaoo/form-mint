@@ -10,8 +10,14 @@ import Themes from "@/app/_data/Themes";
 import GradientBg from "@/app/_data/GradientBg";
 import { Button } from "@/components/ui/button";
 import Style from "@/app/_data/Style";
+import { Checkbox } from "@/components/ui/checkbox";
 
-const Controller = ({ selectedTheme, selectedBackground, selectedBorder }) => {
+const Controller = ({
+  selectedTheme,
+  selectedBackground,
+  selectedBorder,
+  setSignInEnable,
+}) => {
   const [showMore, setShowMore] = useState(6);
   return (
     <div>
@@ -92,6 +98,10 @@ const Controller = ({ selectedTheme, selectedBackground, selectedBorder }) => {
             {item.name}
           </div>
         ))}
+      </div>
+      <div className="flex gap-2 my-4 items-center mt-10">
+        <Checkbox onCheckedChange={(e) => setSignInEnable(e)} />
+        <h2>Enable authentication</h2>
       </div>
     </div>
   );

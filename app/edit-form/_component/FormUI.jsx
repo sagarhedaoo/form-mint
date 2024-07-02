@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -17,6 +18,8 @@ import moment from "moment";
 import { db } from "@/configs";
 import { toast } from "@/components/ui/use-toast";
 import { usePathname } from "next/navigation";
+import { SignInButton, useUser } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 // formTitle, formSubheading and form having formField, formName, fieldName, placeholderName, and formLabel, fieldType, fieldRequired
 const FormUI = ({
@@ -28,12 +31,15 @@ const FormUI = ({
   editable = true,
   preview = true,
   formId = 0,
+  enableSignIn = false,
 }) => {
   const path = usePathname();
   var datetime = new Date();
   const [formData, setFormData] = useState({});
   const [displayConfetti, displayedConfetti] = useState(false);
   let formRef = useRef();
+
+  const { user, isSignedIn } = useUser();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -214,9 +220,16 @@ const FormUI = ({
             )}
           </div>
         ))}
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
+
+        {isSignedIn && enableSignIn ? (
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        ) : (
+          <Button>
+            <SignInButton mode="modal">Sign in to submit</SignInButton>
+          </Button>
+        )}
       </div>
     </form>
   );
