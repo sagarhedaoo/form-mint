@@ -36,7 +36,9 @@ const DashboardFooter = () => {
   return (
     <div className="sticky bottom-0 flex justify-end items-end w-full">
       <div className="bottom-0 p-6 ">
-        <Button className="w-full cursor-pointer">+ Create Form</Button>
+        <Button onclick={<CreateForm />} className="w-full cursor-pointer">
+          + Create Form
+        </Button>
         <div className="my-7">
           <Progress value={percentageFileCreated} />
           <h2 className="text-sm mt-2 text-gray-600">

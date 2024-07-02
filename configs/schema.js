@@ -21,7 +21,7 @@ export const JsonForms = pgTable("jsonForms", {
 export const userResponses = pgTable("userResponses", {
   id: serial("id").primaryKey(),
   jsonResponse: text("jsonResponse").notNull(),
-  createdBy: varchar("createdBy").default("anonymous"),
+  createdBy: varchar("createdBy"),
   createdDate: varchar("createdDate").notNull(),
   formRef: integer("formRef").references(() => JsonForms.id),
 });
