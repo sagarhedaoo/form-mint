@@ -1,10 +1,18 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import {
+  HoveredLink,
+  Menu,
+  MenuItem,
+  ProductItem,
+} from "../_acternityComponents/ui/navbar-menu";
+import { cn } from "@/lib/utils";
+import { Library } from "lucide-react";
 
 const Header = () => {
   const { user, isSignedIn } = useUser();
@@ -34,10 +42,15 @@ const Header = () => {
             onClick={() => imageClick()}
             className="cursor-pointer"
           />
+          <div>
+            <Navbar className="top-2" />
+          </div>
           {isSignedIn ? (
             <div className="flex items-center gap-5">
               <Link href={"/dashboard"}>
-                <Button variant="outline">Dashboard</Button>
+                <Button className="cursor-pointer" variant="outline">
+                  Dashboard
+                </Button>
               </Link>
               <UserButton />
             </div>
@@ -54,5 +67,54 @@ const Header = () => {
     )
   );
 };
+
+function Navbar({ className }) {
+  const [active, setActive] = useState(null);
+  return (
+    <div
+      className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}
+    >
+      <Menu setActive={setActive}>
+        {/* <MenuItem setActive={setActive} active={active} item="Services">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="/web-dev">Forms</HoveredLink>
+            <HoveredLink href="/interface-design">Interface Design</HoveredLink>
+            <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
+            <HoveredLink href="/branding">Branding</HoveredLink>
+          </div>
+        </MenuItem> */}
+        <MenuItem setActive={setActive} active={active} item="Forms">
+          <div className="text-sm grid grid-cols-2 gap-10 p-4">
+            <ProductItem
+              title="My Forms"
+              href="https://localhost:3000/"
+              src="/dashboard.png"
+              description="Create amazing forms"
+            />
+            <ProductItem
+              title="Responses"
+              href="https://localhost:3000/"
+              src="/dashboard.png"
+              description="View your form responses"
+            />
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Analytics">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="/hobby">To-Do</HoveredLink>
+            {/* <HoveredLink href="/individual">Individual</HoveredLink>
+            <HoveredLink href="/team">Team</HoveredLink>
+            <HoveredLink href="/enterprise">Enterprise</HoveredLink> */}
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Upgrade">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="/hobby">To-Do</HoveredLink>
+          </div>
+        </MenuItem>
+      </Menu>
+    </div>
+  );
+}
 
 export default Header;

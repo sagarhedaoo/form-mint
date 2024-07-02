@@ -8,7 +8,7 @@ export const ButtonsCard = ({ children, className, onClick }) => {
     <div
       onClick={onClick}
       className={cn(
-        "h-10 bg-white rounded-xl border border-neutral-100 dark:bg-black dark:border-white/[0.2] hover:border-neutral-200 group/btn overflow-hidden relative flex items-center justify-center",
+        "h-8 bg-white rounded-xl border border-neutral-100 dark:bg-black dark:border-white/[0.2] hover:border-neutral-200 group/btn overflow-hidden relative flex items-center justify-center",
         className
       )}
     >

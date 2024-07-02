@@ -3,7 +3,12 @@ import { db } from "@/configs";
 import { JsonForms } from "@/configs/schema";
 import { useUser } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
-import { ArrowLeft, ShareIcon, SquareArrowUpRightIcon } from "lucide-react";
+import {
+  ArrowLeft,
+  Share,
+  ShareIcon,
+  SquareArrowUpRightIcon,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import FormUI from "../_component/FormUI";
@@ -12,6 +17,8 @@ import Controller from "../_component/Controller";
 import { Button } from "@/components/ui/button";
 import ShinyButton from "@/app/_magicuiComponents/shiny-button";
 import Link from "next/link";
+import { RWebShare } from "react-web-share";
+import { ButtonsCard } from "@/app/_acternityComponents/ui/tailwindcss-buttons";
 
 const EditForm = ({ params }) => {
   const { user } = useUser();
@@ -144,10 +151,20 @@ const EditForm = ({ params }) => {
             <ShinyButton text={"Live Preview"} />{" "}
           </Link>
 
-          <Button className="flex gap-2 hover:bg-green-500">
-            {" "}
-            <ShareIcon className="h-5 w-5" /> Share
-          </Button>
+          <RWebShare
+            data={{
+              text: jsonForm?.formSubheading + ", Built with AI Form Builder",
+              url:
+                process.env.NEXT_PUBLIC_BASE_URL + "form-preview/" + record?.id,
+              title: jsonForm?.formTitle,
+            }}
+            onClick={() => console.log("shared successfully!")}
+          >
+            <Button className="flex gap-2  hover:bg-green-500">
+              {" "}
+              <ShareIcon className="h-5 w-5" /> Share
+            </Button>
+          </RWebShare>
         </div>
       </div>
       <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-5 ">

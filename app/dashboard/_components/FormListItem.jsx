@@ -21,10 +21,12 @@ import { db } from "@/configs";
 import { JsonForms } from "@/configs/schema";
 import { and, eq } from "drizzle-orm";
 import { toast } from "@/components/ui/use-toast";
+import { RWebShare } from "react-web-share";
 
-export const FormListItem = ({ formRecord, jsonForm, refreshData }) => {
+export const FormListItem = ({ formRecord, jsonForm }) => {
   var datetime = new Date();
   const { user } = useUser();
+
   const onDeleteForm = async () => {
     const result = await db
       .delete(JsonForms)
@@ -40,7 +42,6 @@ export const FormListItem = ({ formRecord, jsonForm, refreshData }) => {
         title: `Form ${formRecord.id} Deleted`,
         description: datetime.toISOString().slice(0, 10),
       });
-      refreshData();
     } else {
       toast({
         variant: "destructive",
@@ -60,7 +61,7 @@ export const FormListItem = ({ formRecord, jsonForm, refreshData }) => {
             </LinkPreview>
           </p> */}
 
-          <p className="text-base sm:text-xl mt-2 text-black dark:text-neutral-200">
+          <p className="text-base  mt-2 text-black dark:text-neutral-200">
             {jsonForm?.formTitle}
           </p>
 
@@ -85,13 +86,13 @@ export const FormListItem = ({ formRecord, jsonForm, refreshData }) => {
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        <p className="text-sm text-neutral-600 dark:text-neutral-400 ">
+        <p className="text-xs text-neutral-600 dark:text-neutral-400 ">
           {jsonForm?.formSubheading}
         </p>
 
         <hr className="my-2" />
 
-        <div className="flex gap-3 justify-end items-center mt-4">
+        <div className="flex gap-3 justify-end items-center mt-3">
           <Link href={"/edit-form/" + formRecord?.id} target="_blank">
             <ButtonsCard className="shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)]  bg-[#fff] text-[#696969] rounded-md font-light transition duration-200 ease-linear">
               Edit
@@ -99,10 +100,26 @@ export const FormListItem = ({ formRecord, jsonForm, refreshData }) => {
             </ButtonsCard>
           </Link>
 
-          <ButtonsCard className="shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)]  bg-[#fff] text-[#696969] rounded-md font-light transition duration-200 ease-linear">
+          <RWebShare
+            data={{
+              text: jsonForm?.formSubheading + ", Built with AI Form Builder",
+              url:
+                process.env.NEXT_PUBLIC_BASE_URL +
+                "form-preview/" +
+                formRecord?.id,
+              title: jsonForm?.formTitle,
+            }}
+            onClick={() => console.log("shared successfully!")}
+          >
+            <ButtonsCard className="shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)]  bg-[#fff] text-[#696969] rounded-md font-light transition duration-200 ease-linear">
+              Share
+              <Share className="w-5 h-4" />
+            </ButtonsCard>
+          </RWebShare>
+          {/* <ButtonsCard className="shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)]  bg-[#fff] text-[#696969] rounded-md font-light transition duration-200 ease-linear">
             Share
             <Share className="w-5 h-4" />
-          </ButtonsCard>
+          </ButtonsCard> */}
         </div>
       </BackgroundGradient>
     </div>

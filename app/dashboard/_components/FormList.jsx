@@ -31,7 +31,7 @@ const FormList = () => {
           <FormListItem
             jsonForm={JSON.parse(form.jsonform)}
             formRecord={form}
-            refreshData={getFormList()}
+            // refreshData={getFormList()}
           />
         </div>
       ))}

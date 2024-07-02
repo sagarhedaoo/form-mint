@@ -8,11 +8,11 @@ const DashboardLayout = ({ children }) => {
   return (
     <SignedIn>
       <div>
-        <div className="md:w-64 fixed">
+        {/* <div className="md:w-64 fixed">
           <SideNav />
-        </div>
+        </div> */}
 
-        <div className="md:ml-64">{children}</div>
+        <div className="w-screen">{children}</div>
       </div>
     </SignedIn>
   );
