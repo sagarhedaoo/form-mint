@@ -31,7 +31,7 @@ const FormUI = ({
   editable = true,
   preview = true,
   formId = 0,
-  enableSignIn = false,
+  // enableSignIn = false,
 }) => {
   const path = usePathname();
   var datetime = new Date();
@@ -128,7 +128,7 @@ const FormUI = ({
       <h2 className="text-sm text-gray-600 text-center">
         {jsonForm.formSubheading}
       </h2>
-      <div className="h-fit">
+      <div className="max-h-min">
         {jsonForm?.form?.map((field, index) => (
           <div key={index} className="flex items-center gap-2">
             {field?.fieldType == "select" ? (
@@ -221,7 +221,11 @@ const FormUI = ({
           </div>
         ))}
 
-        {isSignedIn && enableSignIn ? (
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+
+        {/* {isSignedIn && enableSignIn ? (
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
@@ -229,7 +233,7 @@ const FormUI = ({
           <Button>
             <SignInButton mode="modal">Sign in to submit</SignInButton>
           </Button>
-        )}
+        )} */}
       </div>
     </form>
   );

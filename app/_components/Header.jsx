@@ -107,10 +107,7 @@ function Navbar({ className }) {
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Upgrade">
           <div className="text-sm p-2">
-            <ProductItem
-              href={process.env.NEXT_PUBLIC_BASE_URL + "dashboard/upgrade"}
-              src="/upgrade.png"
-            />
+            <ProductItem href={"/dashboard/upgrade"} src="/upgrade.png" />
           </div>
         </MenuItem>
       </Menu>
