@@ -1,34 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { Edit, Loader2, Share, Trash } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BackgroundGradient } from "@/app/_acternityComponents/ui/background-gradient";
 import { ButtonsCard } from "@/app/_acternityComponents/ui/tailwindcss-buttons";
-import { LinkPreview } from "@/app/_acternityComponents/ui/link-preview";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { useUser } from "@clerk/nextjs";
 import { db } from "@/configs";
 import { JsonForms, userResponses } from "@/configs/schema";
 import { and, eq } from "drizzle-orm";
-import { toast } from "@/components/ui/use-toast";
-import { RWebShare } from "react-web-share";
-import { writeXLSX } from "xlsx";
-// import xlsx from "node-xlsx";
 import * as XLSX from "xlsx";
 
 const ResponseFormList = ({ jsonForm, formRecord }) => {
   let jsonData = [];
   const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState("0");
+
+  useEffect(() => {
+    countResponses();
+  });
+
   const exportData = async () => {
     setLoading(true);
     const result = await db
@@ -45,6 +35,28 @@ const ResponseFormList = ({ jsonForm, formRecord }) => {
     console.log(jsonData);
     exportToExcel(jsonData);
     // console.log(result);
+  };
+
+  const countResponses = async () => {
+    const result = await db
+      .select()
+      .from(userResponses)
+      .where(eq(userResponses.formRef, formRecord.id));
+    if (result) {
+      setResponse(result.length.toString());
+    }
+
+    console.log("count:" + result.length.toString());
+  };
+
+  const exportToExcel = (jsonData) => {
+    console.log("exporting");
+
+    const worksheet = XLSX.utils.json_to_sheet(jsonData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    XLSX.writeFile(workbook, jsonForm?.formTitle + ".xlsx");
   };
 
   return (
@@ -70,7 +82,7 @@ const ResponseFormList = ({ jsonForm, formRecord }) => {
 
         <div className="flex justify-between items-center">
           <h2 className="text-sm">
-            <strong>45</strong> Responses
+            <strong>{response}</strong> Responses
           </h2>
           <ButtonsCard
             onClick={() => exportData()}

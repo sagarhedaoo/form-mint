@@ -31,6 +31,8 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.2",
+    "export-from-json": "^1.7.4",
+    "file-saver": "^2.0.5",
     "framer-motion": "^11.2.12",
     "lucide-react": "^0.396.0",
     "moment": "^2.30.1",
