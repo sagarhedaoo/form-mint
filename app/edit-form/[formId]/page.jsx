@@ -155,7 +155,7 @@ const EditForm = ({ params }) => {
             data={{
               text: jsonForm?.formSubheading + ", Built with AI Form Builder",
               url:
-                process.env.NEXT_PUBLIC_BASE_URL + "form-preview/" + record?.id,
+                process.env.NEXT_PUBLIC_BASE_URL + "form-final/" + record?.id,
               title: jsonForm?.formTitle,
             }}
             onClick={() => console.log("shared successfully!")}

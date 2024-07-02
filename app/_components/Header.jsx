@@ -31,7 +31,8 @@ const Header = () => {
   }, []);
 
   return (
-    !path.includes("form-preview") && (
+    !path.includes("form-preview") &&
+    !path.includes("form-final") && (
       <div className="p-5 border-b shadow-sm sticky top-0 z-50 bg-white ">
         <div className="flex items-center justify-between">
           <Image

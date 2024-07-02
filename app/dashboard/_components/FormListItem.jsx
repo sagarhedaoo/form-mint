@@ -53,7 +53,7 @@ export const FormListItem = ({ formRecord, jsonForm }) => {
   return (
     <div className="h-screen">
       <BackgroundGradient className="rounded-[22px]  p-4 sm:p-18   bg-white dark:bg-zinc-900">
-        <div className="flex justify-between items-center mb-2">
+        <div className="flex justify-between items-center gap-4 mb-2">
           {/* Uncomment after deployment */}
           {/* <p className="text-base sm:text-xl mt-2 text-black dark:text-neutral-200">
             <LinkPreview url={"/form-preview/" + formRecord?.id}>
@@ -61,30 +61,31 @@ export const FormListItem = ({ formRecord, jsonForm }) => {
             </LinkPreview>
           </p> */}
 
-          <p className="text-base  mt-2 text-black dark:text-neutral-200">
+          <p className="text-base text-black dark:text-neutral-200">
             {jsonForm?.formTitle}
           </p>
-
-          <AlertDialog>
-            <AlertDialogTrigger>
-              <Trash className="w-5 h-5 text-red-500 cursor-pointer hover:scale-105 transition-all" />
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={() => onDeleteForm()}>
-                  Continue
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <div>
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <Trash className="w-5 h-5 text-red-500 cursor-pointer hover:scale-105 transition-all" />
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => onDeleteForm()}>
+                    Continue
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
         </div>
         <p className="text-xs text-neutral-600 dark:text-neutral-400 ">
           {jsonForm?.formSubheading}
