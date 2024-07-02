@@ -88,13 +88,13 @@ function Navbar({ className }) {
           <div className="text-sm gap-10 p-4 flex justify-center items-center">
             <ProductItem
               title="My Forms"
-              href={process.env.NEXT_PUBLIC_BASE_URL + "dashboard"}
+              href={"/dashboard"}
               src="/dashboard.png"
               description="Create amazing forms"
             />
             <ProductItem
               title="Responses"
-              href={process.env.NEXT_PUBLIC_BASE_URL + "dashboard/responses"}
+              href={"/dashboard/responses"}
               src="/responses.png"
               description="View your form responses"
             />
