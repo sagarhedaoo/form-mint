@@ -51,7 +51,7 @@ export const FormListItem = ({ formRecord, jsonForm }) => {
     }
   };
   return (
-    <div>
+    <div className="h-screen">
       <BackgroundGradient className="rounded-[22px]  p-4 sm:p-18   bg-white dark:bg-zinc-900">
         <div className="flex justify-between items-center mb-2">
           {/* Uncomment after deployment */}
