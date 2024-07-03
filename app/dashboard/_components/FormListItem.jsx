@@ -99,7 +99,7 @@ export const FormListItem = ({ formRecord, jsonForm, url }) => {
           <Link href={"/edit-form/" + formRecord?.id} target="_blank">
             <ButtonsCard className="shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)]  bg-[#fff] text-[#696969] rounded-md font-light transition duration-200 ease-linear">
               Edit
-              <Edit className="w-5 h-4" />
+              <Edit className="w-0 h-0 md:w-4 md:h-4" />
             </ButtonsCard>
           </Link>
 
@@ -116,7 +116,7 @@ export const FormListItem = ({ formRecord, jsonForm, url }) => {
           >
             <ButtonsCard className="shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)]  bg-[#fff] text-[#696969] rounded-md font-light transition duration-200 ease-linear">
               Share
-              <Share className="w-5 h-4" />
+              <Share className="w-0 h-0 md:w-4 md:h-4" />
             </ButtonsCard>
           </RWebShare>
           {/* <ButtonsCard className="shadow-[0_4px_14px_0_rgb(0,0,0,10%)] hover:shadow-[0_6px_20px_rgba(93,93,93,23%)]  bg-[#fff] text-[#696969] rounded-md font-light transition duration-200 ease-linear">

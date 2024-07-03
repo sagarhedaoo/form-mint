@@ -87,7 +87,7 @@ const Controller = ({
       </Button>
 
       <h2 className="mt-8 my-1">Style</h2>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-2 gap-5">
         {Style.map((item, index) => (
           <div
             key={index}
@@ -99,10 +99,10 @@ const Controller = ({
           </div>
         ))}
       </div>
-      <div className="flex gap-2 my-4 items-center mt-10">
+      {/* <div className="flex gap-2 my-4 items-center mt-10">
         <Checkbox onCheckedChange={(e) => setSignInEnable(e)} />
         <h2>Enable authentication</h2>
-      </div>
+      </div> */}
     </div>
   );
 };

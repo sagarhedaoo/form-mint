@@ -138,7 +138,7 @@ const EditForm = ({ params }) => {
   };
   return (
     <div className="p-10">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between gap-4 items-center">
         <h2
           className="flex gap-2 items-center my-5 cursor-pointer hover:font-bold"
           onClick={() => router.back()}

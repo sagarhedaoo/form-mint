@@ -25,7 +25,7 @@ const FormList = () => {
     console.log(result);
   };
   return (
-    <div className="mt-5 grid grid-cols-3 gap-5">
+    <div className="mt-5 grid grid-cols-2 md:grid-cols-3 md:gap-5 gap-2">
       {formList.map((form, index) => (
         <div key={index}>
           <FormListItem

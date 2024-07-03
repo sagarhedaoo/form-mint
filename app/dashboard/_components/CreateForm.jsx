@@ -66,12 +66,12 @@ const CreateForm = () => {
         <DialogTrigger asChild>
           <Button>+ Create Form</Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="md:w-fit w-[300px] md:h-fit h-[250px]">
           <DialogHeader>
             <DialogTitle className="mb-3">
               Write prompt for your form
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="md:w-fit w-[200px]">
               <PlaceholdersAndVanishInput
                 placeholders={placeholders}
                 onChange={(e) => setUserInput(e.target.value)}

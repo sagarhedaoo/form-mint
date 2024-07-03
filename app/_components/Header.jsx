@@ -34,8 +34,8 @@ const Header = () => {
     !path.includes("form-preview") &&
     !path.includes("form-final") && (
       <div className="p-5 border-b shadow-sm sticky top-0 z-50 bg-white ">
-        <div className="flex items-center justify-between">
-          <div className="flex justify-center items-center">
+        <div className="flex items-center justify-between ">
+          <div className="flex justify-center items-center ">
             <Image
               src={"/logo.svg"}
               alt="Logo"
@@ -44,12 +44,14 @@ const Header = () => {
               onClick={() => imageClick()}
               className="cursor-pointer"
             />
-            AI Form Builder
+            <h1 className=" overflow-hidden invisible md:visible lg:visible">
+              AI Form Builder
+            </h1>
           </div>
 
           {isSignedIn ? (
-            <div>
-              <Navbar className="top-2" />
+            <div className="flex justify-center items-center">
+              <Navbar className="bg-transparent" />
               <div className="flex items-center gap-5">
                 <Link href={"/dashboard"}>
                   <Button className="cursor-pointer" variant="outline">
@@ -77,11 +79,14 @@ function Navbar({ className }) {
   const [active, setActive] = useState(null);
   return (
     <div
-      className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}
+      className={cn(
+        "md:fixed md:top-2 md:inset-x-0 mx-auto w-[300px] z-50",
+        className
+      )}
     >
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Forms">
-          <div className="text-sm gap-10 p-4 flex justify-center items-center">
+          <div className="text-sm gap-10 p-4 flex justify-center flex-col items-center">
             <ProductItem
               title="My Forms"
               href={"/dashboard"}

@@ -10,7 +10,7 @@ const Upgrade = () => {
     <div>
       {/* <!-- Features --> */}
       <div class="overflow-hidden">
-        <div class="max-w-[85rem] py-10 sm:px-6 lg:px-8 mx-auto">
+        <div class="max-w-[85rem] py-10 sm:px-6 p-5 lg:px-8 mx-auto">
           {/* <!-- Title --> */}
           <div class="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
             <h2 class="text-3xl lg:text-4xl text-gray-800 font-bold dark:text-neutral-200">
@@ -19,9 +19,9 @@ const Upgrade = () => {
           </div>
           {/* <!-- End Title --> */}
 
-          <div class="relative ">
+          <div class="relative p-6">
             {/* <!-- Grid --> */}
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 h-full">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8  h-full">
               <div>
                 {/* <!-- First Card --> */}
                 <div class="p-4 relative z-10 bg-white border rounded-xl md:p-10 dark:bg-neutral-900 dark:border-neutral-800 ">
