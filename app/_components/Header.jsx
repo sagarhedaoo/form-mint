@@ -47,13 +47,9 @@ const Header = () => {
             AI Form Builder
           </div>
 
-          {/* <div>
-            <Navbar className="top-2" />
-          </div> */}
           {isSignedIn ? (
             <div>
               <Navbar className="top-2" />
-
               <div className="flex items-center gap-5">
                 <Link href={"/dashboard"}>
                   <Button className="cursor-pointer" variant="outline">
@@ -102,7 +98,7 @@ function Navbar({ className }) {
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Analytics">
           <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/hobby">To-Do</HoveredLink>
+            <HoveredLink href={"/analytics"}>Coming soon</HoveredLink>
           </div>
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Upgrade">

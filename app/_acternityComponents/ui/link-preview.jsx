@@ -27,16 +27,17 @@ export const LinkPreview = ({
   if (!isStatic) {
     const params = encode({
       url,
-      screenshot: true,
-      meta: false,
-      embed: "screenshot.url",
-      colorScheme: "dark",
-      "viewport.isMobile": true,
-      "viewport.deviceScaleFactor": 1,
-      "viewport.width": width * 3,
-      "viewport.height": height * 3,
+      // screenshot: true,
+      // meta: false,
+      // embed: "screenshot.url",
+      // colorScheme: "dark",
+      // "viewport.isMobile": true,
+      // "viewport.deviceScaleFactor": 1,
+      // "viewport.width": width * 3,
+      // "viewport.height": height * 3,
     });
-    src = `https://api.microlink.io/?${params}`;
+    src = `https://form-mint.vercel.app/${params}`;
+    // src = `https://form-mint.vercel.app/`;
   } else {
     src = imageSrc;
   }

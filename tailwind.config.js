@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        "hero-black": "rgb(3, 6, 22)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

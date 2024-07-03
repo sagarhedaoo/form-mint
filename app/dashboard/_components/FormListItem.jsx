@@ -23,7 +23,7 @@ import { and, eq } from "drizzle-orm";
 import { toast } from "@/components/ui/use-toast";
 import { RWebShare } from "react-web-share";
 
-export const FormListItem = ({ formRecord, jsonForm }) => {
+export const FormListItem = ({ formRecord, jsonForm, url }) => {
   var datetime = new Date();
   const { user } = useUser();
 
@@ -58,7 +58,7 @@ export const FormListItem = ({ formRecord, jsonForm }) => {
         <div className="flex justify-between items-center gap-4 mb-2">
           {/* Uncomment after deployment */}
           {/* <p className="text-base sm:text-xl mt-2 text-black dark:text-neutral-200">
-            <LinkPreview url={"/form-preview/" + formRecord?.id}>
+            <LinkPreview url={`/form-preview/${formRecord.id}`}>
               {jsonForm?.formTitle}
             </LinkPreview>
           </p> */}

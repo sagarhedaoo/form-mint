@@ -8,7 +8,7 @@ import { db } from "@/configs";
 import { JsonForms } from "@/configs/schema";
 import { desc, eq } from "drizzle-orm";
 
-const DashboardFooter = () => {
+const DashboardFooter = ({ countValue }) => {
   const { user } = useUser();
 
   const [formList, setFormList] = useState([]);
@@ -31,6 +31,7 @@ const DashboardFooter = () => {
     const percent = (result.length / 3) * 100;
     console.log(percent);
     setPercentageFileCreated(percent);
+    countValue = result.length;
   };
 
   return (
