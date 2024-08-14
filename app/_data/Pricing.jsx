@@ -9,9 +9,9 @@ const Price = [
     headline: "Get Started with 3 Free Forms Every Month",
     paymentOption: "USD / monthly",
     includes: [
-      { feature: "Up to 3 Forms per Month" },
-      { feature: "Basic Templates" },
-      { feature: "Basic Analytics" },
+      { feature: "Up to 3 Forms per Month " },
+      { feature: "Basic Templates " },
+      { feature: "Basic Analytics " },
     ],
     notIncluded: [
       { notFeature: "No advanced templates" },
